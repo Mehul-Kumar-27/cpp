@@ -30,7 +30,7 @@ run:
 	@SRC_FILES=$$(find . -name '*.cpp'); \
 	echo "Found source files: $$SRC_FILES"; \
 	echo "Compiling $(ARGS) and dependencies..."; \
-	g++ -o output/$(BASENAME) $$SRC_FILES && \
+	g++ -std=c++20 -o output/$(BASENAME) $$SRC_FILES && \
 	echo "Executable created at output/$(BASENAME)" && \
 	echo "Running the program:" && \
 	./output/$(BASENAME)
