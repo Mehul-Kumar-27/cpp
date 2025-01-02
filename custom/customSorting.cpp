@@ -23,7 +23,7 @@ void selectionSort(std::vector<int> &v)
         // from this index to the last index find the minimum element index
         int min_index = findMinIndex(v, i);
 
-        std::cout << "For round " << i << " min value is " << v[min_index] << std::endl;
+        std::cout << "For round " << i << " min value is " << v[min_index] << " on index: " << min_index << std::endl;
 
         // swap the element at this index with the min index
         std::swap(v[i], v[min_index]);
@@ -38,6 +38,35 @@ void selectionSort(std::vector<int> &v)
     }
 
     // Print the sorted vector
+    std::cout << "Sorted vector: ";
+    for (int i = 0; i < v.size(); i++)
+    {
+        std::cout << v[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+void bubbleSort(std ::vector<int> &v)
+{
+    int n = v.size();
+    for (int i = 0; i < n; i++)
+    {
+        std ::cout << "Round " << i << " running" << std ::endl;
+        bool isSorted = true;
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            if (v[j] > v[j + 1])
+            {
+                isSorted = false;
+                std ::swap(v[j], v[j + 1]);
+            }
+        }
+        if (isSorted)
+        {
+            std ::cout << "Vector is Sorted" << std ::endl;
+            break;
+        }
+    }
     std::cout << "Sorted vector: ";
     for (int i = 0; i < v.size(); i++)
     {
