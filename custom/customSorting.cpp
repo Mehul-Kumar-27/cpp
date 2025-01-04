@@ -12,9 +12,18 @@ int findMinIndex(const std::vector<int> &vec, int index)
 int findMaxIndex(const std::vector<int> &vec, int index)
 {
     auto maxIt = std::max_element(vec.begin() + index, vec.end());
-    return std::distance(vec.begin() + index, maxIt);
+    return std::distance(vec.begin(), maxIt);
 }
 
+void printVector(std ::vector<int> v)
+{
+    std::cout << "Sorted vector: ";
+    for (int i = 0; i < v.size(); i++)
+    {
+        std::cout << v[i] << " ";
+    }
+    std::cout << std::endl;
+}
 // Selection Sorting algorithm
 void selectionSort(std::vector<int> &v)
 {
@@ -37,13 +46,7 @@ void selectionSort(std::vector<int> &v)
         std::cout << std::endl;
     }
 
-    // Print the sorted vector
-    std::cout << "Sorted vector: ";
-    for (int i = 0; i < v.size(); i++)
-    {
-        std::cout << v[i] << " ";
-    }
-    std::cout << std::endl;
+    printVector(v);
 }
 
 void bubbleSort(std ::vector<int> &v)
@@ -67,10 +70,35 @@ void bubbleSort(std ::vector<int> &v)
             break;
         }
     }
-    std::cout << "Sorted vector: ";
-    for (int i = 0; i < v.size(); i++)
+
+    printVector(v);
+}
+
+void insertionSort(std ::vector<int> &v)
+{
+    // Consider the 0th index as already sorted
+    int n = v.size();
+    for (int i = 1; i < n; i++)
     {
-        std::cout << v[i] << " ";
+        // Now search for the index where it should be places in the right array
+        int j = i - 1;
+        int temp = v[i];
+        while (j >= 0)
+        {
+            if (v[j] > temp)
+            {
+                v[j + 1] = v[j];
+            }
+            else
+            {
+                // the element at the j position is either smaller or equal to or smaller than the temp
+                // we want to place the temp element just before the j
+                break;
+            }
+            j--;
+        }
+        v[j + 1] = temp;
     }
-    std::cout << std::endl;
+
+    printVector(v);
 }

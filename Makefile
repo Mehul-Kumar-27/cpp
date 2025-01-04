@@ -13,7 +13,7 @@ ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 BASENAME := $(notdir $(basename $(ARGS)))
 
 # Declare phony targets
-.PHONY: all run clean help
+.PHONY: all run clean help test
 
 # Compile and run target
 run:
@@ -45,10 +45,28 @@ help:
 	@echo "  make run <filepath>  - Compile and run a specific cpp file"
 	@echo "  make clean          - Remove all files from output directory"
 	@echo "  make help           - Show this help message"
+	@echo "  make test <filepath> - Compile and run specific test"
 	@echo ""
 	@echo "Example usage:"
 	@echo "  make run hello.cpp"
 	@echo "  make run src/hello.cpp"
+	@echo "  make test tests/test_custom_sorting.cpp"
+
+# Test target to compile and run Google Test tests
+test:
+	@if [ "$(ARGS)" = "" ]; then \
+		echo "Error: Please specify a test file path"; \
+		exit 1; \
+	fi
+	@if [ ! -f "$(ARGS)" ]; then \
+		echo "Error: Test file '$(ARGS)' does not exist"; \
+		exit 1; \
+	fi
+	@echo "Compiling $(ARGS) and dependencies..."
+	g++ -std=c++17 -I/opt/homebrew/Cellar/googletest/1.15.2/include \
+	-L/opt/homebrew/Cellar/googletest/1.15.2/lib -lgtest -lgtest_main -pthread \
+	$(ARGS) custom/*.cpp -o output/test_runner && \
+	./output/test_runner
 
 # Catch-all target to handle the arguments
 %:
