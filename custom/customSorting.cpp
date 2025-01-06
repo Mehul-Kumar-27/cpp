@@ -15,6 +15,59 @@ int findMaxIndex(const std::vector<int> &vec, int index)
     return std::distance(vec.begin(), maxIt);
 }
 
+int partition(std ::vector<int> &v, int low, int high, int mid)
+{
+    // First make sure that the value at index mid is at right postion between the low and the high
+    // Count the number of small elements present in the array
+    int val = v[mid];
+    int count = 0;
+
+    for (int i = low; i <= high; i++)
+    {
+        if (v[i] < val)
+        {
+            count++;
+        }
+    }
+
+    // now move the mid element to the low + count position
+    int position = low + count;
+    std ::swap(v[mid], v[position]);
+
+    // Now make sure that all the elements to the right or position are bigger and on the left are smaller
+    int i = low;
+    int j = high;
+
+    while (i <= j)
+    {
+        while (i < position)
+        {
+            if (v[i] > val)
+            {
+                break;
+            }
+            i++;
+        }
+
+        while (j > position)
+        {
+            if (v[j] < val)
+            {
+                break;
+            }
+            j--;
+        }
+
+        if (i < position && j > position)
+        {
+            std ::swap(v[i], v[j]);
+        }
+        i++;
+        j--;
+    }
+    return position;
+}
+
 void printVector(std ::vector<int> v)
 {
     std::cout << "Sorted vector: ";
@@ -32,21 +85,9 @@ void selectionSort(std::vector<int> &v)
         // from this index to the last index find the minimum element index
         int min_index = findMinIndex(v, i);
 
-        std::cout << "For round " << i << " min value is " << v[min_index] << " on index: " << min_index << std::endl;
-
         // swap the element at this index with the min index
         std::swap(v[i], v[min_index]);
-
-        // Print vector after this round
-        std::cout << "Vector after round " << i << ": ";
-        for (int j = 0; j < v.size(); j++)
-        {
-            std::cout << v[j] << " ";
-        }
-        std::cout << std::endl;
     }
-
-    printVector(v);
 }
 
 void bubbleSort(std ::vector<int> &v)
@@ -54,7 +95,6 @@ void bubbleSort(std ::vector<int> &v)
     int n = v.size();
     for (int i = 0; i < n; i++)
     {
-        std ::cout << "Round " << i << " running" << std ::endl;
         bool isSorted = true;
         for (int j = 0; j < n - i - 1; j++)
         {
@@ -66,12 +106,9 @@ void bubbleSort(std ::vector<int> &v)
         }
         if (isSorted)
         {
-            std ::cout << "Vector is Sorted" << std ::endl;
             break;
         }
     }
-
-    printVector(v);
 }
 
 void insertionSort(std ::vector<int> &v)
@@ -99,6 +136,27 @@ void insertionSort(std ::vector<int> &v)
         }
         v[j + 1] = temp;
     }
+}
 
+// sorts the vector using quick sort
+void quickSort(std ::vector<int> &v, int low = 0, int high = -100)
+{
+    if (high == -100)
+    {
+        high = v.size() - 1;
+    }
+
+    if (low >= high)
+    {
+        return;
+    }
+
+    int mid = high - (high - low) / 2;
+
+    int p = partition(v, low, high, mid);
+
+    quickSort(v, low, p - 1);
+    quickSort(v, p + 1, high);
     printVector(v);
+    return;
 }

@@ -17,7 +17,7 @@ BASENAME := $(notdir $(basename $(ARGS)))
 
 # Compile and run target
 run:
-	@if [ "$(ARGS)" = "" ]; then \
+	@if [ -z "$(ARGS)" ]; then \
 		echo "Error: Please specify a file path"; \
 		echo "Example: make run src/main.cpp"; \
 		exit 1; \
@@ -54,7 +54,7 @@ help:
 
 # Test target to compile and run Google Test tests
 test:
-	@if [ "$(ARGS)" = "" ]; then \
+	@if [ -z "$(ARGS)" ]; then \
 		echo "Error: Please specify a test file path"; \
 		exit 1; \
 	fi
@@ -66,8 +66,9 @@ test:
 	g++ -std=c++17 -I/opt/homebrew/Cellar/googletest/1.15.2/include \
 	-L/opt/homebrew/Cellar/googletest/1.15.2/lib -lgtest -lgtest_main -pthread \
 	$(ARGS) custom/*.cpp -o output/test_runner && \
-	./output/test_runner
+	./output/test_runner --gtest_catch_exceptions=0 --gtest_break_on_failure --gtest_print_time=0
 
 # Catch-all target to handle the arguments
 %:
-	@:
+	@echo "Invalid target: $@"
+	@echo "Use 'make help' to see available commands."

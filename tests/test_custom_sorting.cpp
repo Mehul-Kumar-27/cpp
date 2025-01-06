@@ -42,8 +42,8 @@ TEST(SortingTest, SelectionSortTest)
         {1},             // Single element
         {1, 2, 3, 4, 5}, // Already sorted
         {5, 4, 3, 2, 1}, // Reverse sorted
-        {9, 5, 1, 3, 7}  // Random order
-    };
+        {9, 5, 1, 3, 7}, // Random order
+        {1, 1, 1, 1, 1, 1}};
 
     for (auto &vec : testVectors)
     {
@@ -59,8 +59,8 @@ TEST(SortingTest, BubbleSortTest)
         {1},             // Single element
         {1, 2, 3, 4, 5}, // Already sorted
         {5, 4, 3, 2, 1}, // Reverse sorted
-        {9, 5, 1, 3, 7}  // Random order
-    };
+        {9, 5, 1, 3, 7}, // Random order
+        {1, 1, 1, 1, 1, 1}};
 
     for (auto &vec : testVectors)
     {
@@ -76,12 +76,37 @@ TEST(SortingTest, InsertionSortTest)
         {1},             // Single element
         {1, 2, 3, 4, 5}, // Already sorted
         {5, 4, 3, 2, 1}, // Reverse sorted
-        {9, 5, 1, 3, 7}  // Random order
-    };
+        {9, 5, 1, 3, 7}, // Random order
+        {1, 1, 1, 1, 1, 1}};
 
     for (auto &vec : testVectors)
     {
         insertionSort(vec);
         EXPECT_TRUE(isSorted(vec)) << "The vector is not sorted after insertionSort.";
+    }
+}
+
+TEST(SortingTest, QuickSortSortTest)
+{
+    std::vector<std::vector<int>> testVectors = {
+        {},              // Empty vector
+        {1},             // Single element
+        {1, 2, 3, 4, 5}, // Already sorted
+        {5, 4, 3, 2, 1}, // Reverse sorted
+        {9, 5, 1, 3, 7}};
+
+    for (auto &vec : testVectors)
+    {
+        quickSort(vec);
+        if (!isSorted(vec))
+        {
+            std::ostringstream oss;
+            for (const auto &val : vec)
+            {
+                oss << val << " ";
+            }
+            ADD_FAILURE() << "The vector is not sorted after quickSort: " << oss.str();
+        }
+        EXPECT_TRUE(isSorted(vec));
     }
 }
