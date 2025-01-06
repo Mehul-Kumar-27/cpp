@@ -8,10 +8,10 @@
       "name": "clang++ - Build and debug active file",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${fileDirname}/${workspaceFolder}",
+      "program": "${workspaceFolder}/output/test_runner",
       "cwd": "${workspaceFolder}",
       "args": [],
-      "stopAtEntry": false,
+      "stopAtEntry": true,
       "MIMode": "lldb"
     }
   ]

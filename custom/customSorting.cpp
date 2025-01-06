@@ -139,24 +139,74 @@ void insertionSort(std ::vector<int> &v)
 }
 
 // sorts the vector using quick sort
-void quickSort(std ::vector<int> &v, int low = 0, int high = -100)
+void quickSort(std ::vector<int> &v, int low, int high)
 {
-    if (high == -100)
-    {
-        high = v.size() - 1;
-    }
-
     if (low >= high)
     {
         return;
     }
 
-    int mid = high - (high - low) / 2;
+    int mid = low + (high - low) / 2;
 
     int p = partition(v, low, high, mid);
 
     quickSort(v, low, p - 1);
     quickSort(v, p + 1, high);
-    printVector(v);
     return;
+}
+
+void merge(std ::vector<int> &v, int low, int mid, int high)
+{
+    // Create the copy of the vector
+    std ::vector<int> temp = v;
+
+    // Now start the two pointers for the two sorted vectors
+    int p1 = low;
+    int p2 = mid + 1;
+    int p3 = low;
+    while (p1 <= mid && p2 <= high)
+    {
+        // find which value is smaller currently
+        if (temp[p1] < temp[p2])
+        {
+            v[p3] = temp[p1];
+            p1++;
+        }
+        else
+        {
+            v[p3] = temp[p2];
+            p2++;
+        }
+        p3++;
+    }
+
+    // Remaining Part
+    while (p1 <= mid)
+    {
+        v[p3] = temp[p1];
+        p1++;
+        p3++;
+    }
+
+    while (p2 <= high)
+    {
+        v[p3] = temp[p2];
+        p2++;
+        p3++;
+    }
+}
+
+void mergeSort(std ::vector<int> &v, int low, int high)
+{
+    /// Base Case
+    if (low >= high)
+    {
+        return;
+    }
+
+    int mid = low + (high - low) / 2;
+
+    mergeSort(v, low, mid);
+    mergeSort(v, mid + 1, high);
+    merge(v, low, mid, high);
 }
