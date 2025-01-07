@@ -5,9 +5,11 @@
 #include <vector>
 #include <unordered_map>
 
-class ArraySolutions {
+class ArraySolutions
+{
 public:
-    std::vector<int> twoSum(const std::vector<int>& nums, int target);
+    std::vector<int> twoSum(const std::vector<int> &nums, int target);
+    void dutchNationalFlag(std ::vector<int> &vec);
 };
 
 #endif // ARRAY_H
