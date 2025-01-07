@@ -65,7 +65,7 @@ test:
 	@echo "Compiling $(ARGS) and dependencies..."
 	g++ -std=c++17 -I/opt/homebrew/Cellar/googletest/1.15.2/include \
 	-L/opt/homebrew/Cellar/googletest/1.15.2/lib -lgtest -lgtest_main -pthread \
-	$(ARGS) custom/*.cpp -o output/test_runner && \
+	$(ARGS) custom/*.cpp arrays/*.cpp -o output/test_runner && \
 	./output/test_runner --gtest_catch_exceptions=0 --gtest_break_on_failure --gtest_print_time=0
 
 # Catch-all target to handle the arguments
