@@ -77,3 +77,27 @@ TEST(ArrayQuestions, MoreThanHalf)
         EXPECT_EQ(solver.moreThanHalf(vec), ans);
     }
 }
+
+TEST(ArrayQuestions, KadaneAlgorithm)
+{
+    std::vector<std::pair<std::vector<int>, long long>> kadaneTestCases = {
+        {{-2, 1, -3, 4, -1, 2, 1, -5, 4}, 6},           // Standard case
+        {{1}, 1},                                       // Single element
+        {{5, 4, -1, 7, 8}, 23},                         // All positive with one negative
+        {{-1, -2, -3, -4}, -1},                         // All negative
+        {{INT_MAX, -1, INT_MAX}, 2147483647LL * 2 - 1}, // Including INT_MAX
+        {{INT_MIN, INT_MIN, INT_MIN}, INT_MIN},         // All INT_MIN
+        {{0, 0, 0, 0}, 0},                              // All zeros
+        {{-1, 2, 3, -5, 4, 6, -1}, 10}
+    };
+    ArraySolutions solver;
+
+    for (const auto &testCase : kadaneTestCases)
+    {
+        const auto &vec = testCase.first;
+        const auto &expectedAns = testCase.second;
+
+        long long result = solver.kadaneAlgorithm(vec);
+        EXPECT_EQ(result, expectedAns) << "Failed for vector: " << ::testing::PrintToString(vec);
+    }
+}
