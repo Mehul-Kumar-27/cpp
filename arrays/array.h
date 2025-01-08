@@ -3,6 +3,7 @@
 #define ARRAY_H
 
 #include <vector>
+#include <iostream>
 #include <unordered_map>
 
 class ArraySolutions
@@ -10,6 +11,7 @@ class ArraySolutions
 public:
     std::vector<int> twoSum(const std::vector<int> &nums, int target);
     void dutchNationalFlag(std ::vector<int> &vec);
+    int moreThanHalf(std ::vector<int> vec);
 };
 
 #endif // ARRAY_H
