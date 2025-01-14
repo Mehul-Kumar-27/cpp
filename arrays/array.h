@@ -14,6 +14,7 @@ public:
     int moreThanHalf(std ::vector<int> vec);
     long long kadaneAlgorithm(std ::vector<int> vec);
     std ::vector<std ::vector<int>> allPermutations(std ::vector<int> &vec);
+    int longestSubsequence(std ::vector<int> vec);
 };
 
 #endif // ARRAY_H

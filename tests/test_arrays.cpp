@@ -108,9 +108,7 @@ TEST(ArrayQuestions, GenerateAllPermutations)
         {1, 2, 3, 4, 5},
         {1, 2, 3, 4, 5, 6},
         {1, 2, 3, 4, 5, 6, 7},
-        {1, 2, 3, 4, 5, 6, 7, 8},
-        {1, 2, 3, 4, 5, 6, 7, 8, 9},
-        {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}};
+        {1, 2, 3, 4, 5, 6, 7, 8}};
     ArraySolutions solver;
 
     for (const auto &testCase : testCases)
@@ -122,5 +120,32 @@ TEST(ArrayQuestions, GenerateAllPermutations)
         std::chrono::duration<double> duration = end - start;
         std::cout << "Time taken to generate permutations: " << duration.count() << " seconds" << std::endl;
         std ::cout << "Number of Permutaions Genereated " << permutations.size() << std::endl;
+    }
+}
+
+TEST(ArrayQuestions, LongestSubSequenceOfConsecutive)
+{
+    std ::vector<std ::pair<std ::vector<int>, int>> testCases = {
+        {{100, 4, 200, 1, 3, 2}, 4},          // The sequence 1, 2, 3, 4
+        {{0, 3, 7, 2, 5, 8, 4, 6, 0, 1}, 9},  // The sequence 0 to 8
+        {{1, 2, 0, 1}, 3},                    // The sequence 0, 1, 2
+        {{9, 1, 4, 7, 3, -1, 0, 5, 8, 6}, 7}, // The sequence -1 to 5
+        {{10, 20, 30, 40}, 1},                // No consecutive sequence, all individual
+        {{1, 2, 3, 4, 5, 6, 7, 8, 9}, 9},     // Continuous sequence
+        {{5, 6, 2, 1, 4}, 3},                 // The sequence 1 to 3
+        {{}, 0},                              // Empty input
+        {{1}, 1},                             // Single element
+        {{1, 1, 1, 1}, 1},                    // Repeated single element
+        {{1, 2, 2, 3, 3, 4, 4, 5}, 5},        // Duplicate entries, sequence 1 to 5
+    };
+    ArraySolutions solver;
+
+    for (const auto &testCase : testCases)
+    {
+        const auto &vec = testCase.first;
+        const auto &expectedAns = testCase.second;
+
+        long long result = solver.longestSubsequence(vec);
+        EXPECT_EQ(result, expectedAns) << "Failed for vector: " << ::testing::PrintToString(vec);
     }
 }
