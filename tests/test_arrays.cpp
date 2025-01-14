@@ -88,8 +88,7 @@ TEST(ArrayQuestions, KadaneAlgorithm)
         {{INT_MAX, -1, INT_MAX}, 2147483647LL * 2 - 1}, // Including INT_MAX
         {{INT_MIN, INT_MIN, INT_MIN}, INT_MIN},         // All INT_MIN
         {{0, 0, 0, 0}, 0},                              // All zeros
-        {{-1, 2, 3, -5, 4, 6, -1}, 10}
-    };
+        {{-1, 2, 3, -5, 4, 6, -1}, 10}};
     ArraySolutions solver;
 
     for (const auto &testCase : kadaneTestCases)
@@ -99,5 +98,29 @@ TEST(ArrayQuestions, KadaneAlgorithm)
 
         long long result = solver.kadaneAlgorithm(vec);
         EXPECT_EQ(result, expectedAns) << "Failed for vector: " << ::testing::PrintToString(vec);
+    }
+}
+
+TEST(ArrayQuestions, GenerateAllPermutations)
+{
+    // Global vector of test cases
+    std::vector<std::vector<int>> testCases = {
+        {1, 2, 3, 4, 5},
+        {1, 2, 3, 4, 5, 6},
+        {1, 2, 3, 4, 5, 6, 7},
+        {1, 2, 3, 4, 5, 6, 7, 8},
+        {1, 2, 3, 4, 5, 6, 7, 8, 9},
+        {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}};
+    ArraySolutions solver;
+
+    for (const auto &testCase : testCases)
+    {
+        std ::vector<int> test_vector = testCase;
+        auto start = std::chrono::high_resolution_clock::now();
+        std ::vector<std ::vector<int>> permutations = solver.allPermutations(test_vector);
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> duration = end - start;
+        std::cout << "Time taken to generate permutations: " << duration.count() << " seconds" << std::endl;
+        std ::cout << "Number of Permutaions Genereated " << permutations.size() << std::endl;
     }
 }

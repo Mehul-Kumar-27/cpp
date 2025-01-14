@@ -13,6 +13,7 @@ public:
     void dutchNationalFlag(std ::vector<int> &vec);
     int moreThanHalf(std ::vector<int> vec);
     long long kadaneAlgorithm(std ::vector<int> vec);
+    std ::vector<std ::vector<int>> allPermutations(std ::vector<int> &vec);
 };
 
 #endif // ARRAY_H
