@@ -149,3 +149,43 @@ TEST(ArrayQuestions, LongestSubSequenceOfConsecutive)
         EXPECT_EQ(result, expectedAns) << "Failed for vector: " << ::testing::PrintToString(vec);
     }
 }
+
+TEST(ArrayQuestions, PascalTriangle)
+{
+    std::vector<std::pair<int, std::vector<std::vector<int>>>> testCases = {
+        // Test Case 1: numRows = 1
+        {1, {{1}}},
+
+        // Test Case 2: numRows = 2
+        {2, {{1}, {1, 1}}},
+
+        // Test Case 3: numRows = 3
+        {3, {{1}, {1, 1}, {1, 2, 1}}},
+
+        // Test Case 4: numRows = 4
+        {4, {{1}, {1, 1}, {1, 2, 1}, {1, 3, 3, 1}}},
+
+        // Test Case 5: numRows = 5
+        {5, {{1}, {1, 1}, {1, 2, 1}, {1, 3, 3, 1}, {1, 4, 6, 4, 1}}},
+
+        // Test Case 6: numRows = 6
+        {6, {{1}, {1, 1}, {1, 2, 1}, {1, 3, 3, 1}, {1, 4, 6, 4, 1}, {1, 5, 10, 10, 5, 1}}},
+
+        // Test Case 7: Edge Case: numRows = 0
+        {0, {}},
+
+        // Test Case 8: numRows = 10
+        {10, {{1}, {1, 1}, {1, 2, 1}, {1, 3, 3, 1}, {1, 4, 6, 4, 1}, {1, 5, 10, 10, 5, 1}, {1, 6, 15, 20, 15, 6, 1}, {1, 7, 21, 35, 35, 21, 7, 1}, {1, 8, 28, 56, 70, 56, 28, 8, 1}, {1, 9, 36, 84, 126, 126, 84, 36, 9, 1}}}
+    };
+
+    ArraySolutions solver;
+
+    for (const auto &testCase : testCases)
+    {
+        const int numRows = testCase.first;
+        const auto &expectedAns = testCase.second;
+
+        std::vector<std::vector<int>> result = solver.pascalTriangle(numRows);
+        EXPECT_EQ(result, expectedAns) << "Failed for numRows: " << numRows;
+    }
+}

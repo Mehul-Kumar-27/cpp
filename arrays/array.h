@@ -15,6 +15,7 @@ public:
     long long kadaneAlgorithm(std ::vector<int> vec);
     std ::vector<std ::vector<int>> allPermutations(std ::vector<int> &vec);
     int longestSubsequence(std ::vector<int> vec);
+    std ::vector<std::vector<int>> pascalTriangle(int numRows);
 };
 
 #endif // ARRAY_H
