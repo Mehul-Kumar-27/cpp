@@ -16,6 +16,7 @@ public:
     std ::vector<std ::vector<int>> allPermutations(std ::vector<int> &vec);
     int longestSubsequence(std ::vector<int> vec);
     std ::vector<std::vector<int>> pascalTriangle(int numRows);
+    std::vector<int> moreThanOneThird(std::vector<int> &vec);
 };
 
 #endif // ARRAY_H
